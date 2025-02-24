@@ -4,13 +4,13 @@ import joblib
 import json
 import pandas as pd
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+app = func.FunctionApp()
 
 # Load the model at the start so that it doesn't need to be loaded on every request
 model = joblib.load('rfr_model.pkl')
 
 @app.function_name(name="wilp_models")
-@app.route(route="wilp_models", methods=["POST"])
+@app.route(route="req")
 def wilp_models(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 

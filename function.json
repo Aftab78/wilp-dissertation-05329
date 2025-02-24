@@ -4,7 +4,7 @@
         "authLevel": "function",
         "type": "httpTrigger",
         "direction": "in",
-        "name": "req",
+        "name": "wilp_models",
         "methods": ["get", "post"],
         "route": "wilp_models"
       },

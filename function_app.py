@@ -10,7 +10,7 @@ app = func.FunctionApp()
 model = joblib.load('rfr_model.pkl')
 
 @app.function_name(name="wilp_models")
-@app.route(route="rfr_model")
+@app.route(route="wilp_models")
 def wilp_models(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 

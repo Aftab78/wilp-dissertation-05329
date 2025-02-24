@@ -9,7 +9,8 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 # Load the model at the start so that it doesn't need to be loaded on every request
 model = joblib.load('rfr_model.pkl')
 
-@app.route(route="wilp_models")
+@app.route(route="wilp_models", methods=["POST"])
+
 def wilp_models(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 

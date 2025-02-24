@@ -4,12 +4,11 @@ import joblib
 import json
 import pandas as pd
 
-app = func.FunctionApp()
+app = func.FunctionApp(auth_level=func.AuthLevel.FUNCTION)
 
 # Load the model at the start so that it doesn't need to be loaded on every request
 model = joblib.load('rfr_model.pkl')
 
-@app.function_name(name="wilp_models")
 @app.route(route="wilp_models")
 def wilp_models(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -52,4 +51,26 @@ def wilp_models(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             "An error occurred while performing prediction. Please check your input data and try again.",
             status_code=500
+        )
+
+
+@app.route(route="http_trigger")
+def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a request.')
+
+    name = req.params.get('name')
+    if not name:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            name = req_body.get('name')
+
+    if name:
+        return func.HttpResponse(f"Hello, {name}. This HTTP triggered function executed successfully.")
+    else:
+        return func.HttpResponse(
+             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+             status_code=200
         )

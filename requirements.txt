@@ -8,4 +8,4 @@ numpy
 pandas
 scipy
 statsmodels
-scikit-learn==1.5.0
+scikit-learn==1.5.2

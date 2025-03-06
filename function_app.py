@@ -5,13 +5,13 @@ import json
 import pandas as pd
 
 # Load the model at the start so that it doesn't need to be loaded on every request
-model = joblib.load('rfr_model.pkl')
+rfr_model = joblib.load('rfr_model.pkl')
+xgbr_model = joblib.load('xgbr_model.pkl')
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
-@app.route(route="wilp_models")
-def wilp_models(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
+
+def predict(req, model):
 
     try:
         req_body = req.get_json()
@@ -52,3 +52,12 @@ def wilp_models(req: func.HttpRequest) -> func.HttpResponse:
             "An error occurred while performing prediction. Please check your input data and try again.",
             status_code=500
         )
+# Route for Random Forest Model
+@app.route(route="predict-rfr", methods=["POST"])
+def predict_rfr(req: func.HttpRequest) -> func.HttpResponse:
+    return predict(req, rfr_model)
+
+# Route for XGBoost Model
+@app.route(route="predict-xgbr", methods=["POST"])
+def predict_xgbr(req: func.HttpRequest) -> func.HttpResponse:
+    return predict(req, xgbr_model)

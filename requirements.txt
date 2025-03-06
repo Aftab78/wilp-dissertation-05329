@@ -4,4 +4,8 @@
 
 azure-functions
 joblib
+numpy
 pandas
+scipy
+statsmodels
+scikit-learn==1.5.0

@@ -6,7 +6,6 @@ import pandas as pd
 
 # Load the model at the start so that it doesn't need to be loaded on every request
 model1 = joblib.load('rfr_model.pkl')
-model2 = joblib.load('svr_model.pkl')
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 

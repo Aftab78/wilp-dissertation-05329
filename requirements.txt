@@ -9,3 +9,4 @@ pandas
 scipy
 statsmodels
 scikit-learn==1.5.2
+xgboost

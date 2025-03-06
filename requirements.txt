@@ -4,5 +4,4 @@
 
 azure-functions
 joblib
-numpy
 pandas

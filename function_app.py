@@ -3,7 +3,8 @@ import logging
 import joblib
 import json
 import pandas as pd
-import XGBRegressor
+from xgboost import XGBRegressor
+
 
 # Load the model at the start so that it doesn't need to be loaded on every request
 model1 = joblib.load('rfr_model.pkl')

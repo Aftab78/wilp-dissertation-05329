@@ -8,20 +8,13 @@ import json
 import pandas as pd
 from xgboost import XGBRegressor
 import tensorflow as tf
-from tensorflow.keras.models import load_model
-import os
-
-tf.get_logger().setLevel(logging.ERROR)
-os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress TensorFlow logging
-warnings.filterwarnings("ignore", category=UserWarning, module='tensorflow')
 
 # Load the model at the start so that it doesn't need to be loaded on every request
 model1 = joblib.load('rfr_model.pkl')
 model2 = joblib.load('svr_model.pkl')
 model3 = XGBRegressor()
 model3.load_model("xgbr_model.json")
-model4 = load_model("cnn_model.keras")
+model4 = tf.keras.models.load_model("cnn_model.keras")
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 

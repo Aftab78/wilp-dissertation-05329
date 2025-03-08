@@ -1,7 +1,5 @@
 import warnings
 warnings.filterwarnings(action='ignore')
-warnings.filterwarnings(action='ignore', category=FutureWarning) # setting ignore as a parameter and further adding category
-warnings.simplefilter('ignore')
 
 import azure.functions as func
 import logging
@@ -16,7 +14,6 @@ import os
 tf.get_logger().setLevel(logging.ERROR)
 os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress TensorFlow logging
-tf.get_logger().setLevel('ERROR')
 warnings.filterwarnings("ignore", category=UserWarning, module='tensorflow')
 
 # Load the model at the start so that it doesn't need to be loaded on every request

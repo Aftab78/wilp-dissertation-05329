@@ -8,6 +8,8 @@ import json
 import pandas as pd
 from xgboost import XGBRegressor
 import tensorflow as tf
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 # Load the model at the start so that it doesn't need to be loaded on every request
 model1 = joblib.load('rfr_model.pkl')

@@ -3,11 +3,13 @@ import logging
 import joblib
 import json
 import pandas as pd
+import XGBRegressor
 
 # Load the model at the start so that it doesn't need to be loaded on every request
 model1 = joblib.load('rfr_model.pkl')
 model2 = joblib.load('svr_model.pkl')
-model3 = joblib.load('xgbr_model.pkl')
+model3 = XGBRegressor()
+model3.load_model("xgbr_model.json")
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
 @app.route(route="rfr_models")
@@ -121,7 +123,7 @@ def xgbr_models(req: func.HttpRequest) -> func.HttpResponse:
         df['month'] = df['ALL_DATE'].apply(lambda x: int(x[3:5]))
         
         x = df[['year', 'month']]
-        predictions = model1.predict(x)
+        predictions = model3.predict(x)
 
         result = {
             "predictions": predictions.tolist()

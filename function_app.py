@@ -101,7 +101,7 @@ def svr_models(req: func.HttpRequest) -> func.HttpResponse:
         
 @app.route(route="xgbr_models")
 def xgbr_models(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger xgbr_models function processed a request.')
+    logging.info('Python HTTP trigger xgbr_model function processed a request.')
 
     try:
         req_body = req.get_json()
